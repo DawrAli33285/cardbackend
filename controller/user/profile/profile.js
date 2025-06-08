@@ -1,7 +1,8 @@
 const userModel = require("../../../models/user/user");
 const fs=require('fs').promises
 const path=require('path')
-const {cloudinaryUpload}=require('../../../middleware/cloudinary')
+const {cloudinaryUpload}=require('../../../middleware/cloudinary');
+const subscriptionModel = require("../../../models/user/subscription");
 
 
 module.exports.updateProfile = async (req, res) => {
@@ -91,8 +92,11 @@ module.exports.getProfile=async(req,res)=>{
     try{
       
 let user=await userModel.findOne({_id:req.user.id}).populate('recentMatchHistory')
+let subscription=await subscriptionModel.findOne({user:req.user.id})
+
 return res.status(200).json({
-    user
+    user,
+    subscription
 })
     }catch(e){
         console.log(e.message)

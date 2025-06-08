@@ -96,8 +96,8 @@ console.log("CODE")
         }
       });
 
-      console.log('tokenResponse')
-      console.log(tokenResponse.data)
+     
+    
       return res.status(200).json({
         token:tokenResponse.data.token
       })
